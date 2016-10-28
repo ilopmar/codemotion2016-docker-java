@@ -1,0 +1,22 @@
+version: '2'
+services:
+  postgresql:
+    image: reverse-app/postgresql
+
+  rabbitmq:
+    image: reverse-app/rabbitmq
+
+  producer:
+    image: reverse-app/producer
+    ports:
+      - "8080:8080"
+    links:
+      - rabbitmq:rabbitmq
+    environment:
+      - "SPRING_PROFILES_ACTIVE=docker"
+
+  consumer:
+    image: reverse-app/consumer
+    links:
+      - rabbitmq:rabbitmq
+      - postgresql:postgresql

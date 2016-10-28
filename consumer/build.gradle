@@ -15,7 +15,6 @@ group "consumer"
 
 apply plugin:"eclipse"
 apply plugin:"idea"
-apply plugin:"war"
 apply plugin:"org.grails.grails-web"
 apply plugin:"org.grails.grails-gsp"
 apply plugin:"asset-pipeline"
@@ -63,4 +62,10 @@ dependencies {
 assets {
     minifyJs = true
     minifyCss = true
+}
+
+task prepareDocker(type: Copy, dependsOn: build) {
+    from file('src/main/docker/Dockerfile')
+    from project.jar
+    into "${buildDir}/docker"
 }

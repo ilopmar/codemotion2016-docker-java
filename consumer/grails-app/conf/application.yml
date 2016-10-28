@@ -126,3 +126,12 @@ environments:
                 testOnReturn: false
                 jdbcInterceptors: ConnectionState
                 defaultTransactionIsolation: 2 # TRANSACTION_READ_COMMITTED
+
+---
+environments:
+    production:
+        dataSource:
+            dbCreate: create-drop
+            url: jdbc:postgresql://postgresql:5432/reverseapp
+            username: reverseapp
+            password: reverseapp

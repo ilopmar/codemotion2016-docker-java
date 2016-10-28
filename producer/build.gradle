@@ -31,3 +31,9 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
+
+task prepareDocker(type: Copy, dependsOn: build) {
+    from file('src/main/docker/Dockerfile')
+    from project.jar
+    into "${buildDir}/docker"
+}
